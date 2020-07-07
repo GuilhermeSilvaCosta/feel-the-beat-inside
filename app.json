@@ -29,6 +29,10 @@
         ]
       }
     },
+    "android": {
+      "package": "com.guilherme.feelthebeatinside",
+      "versionCode": 1
+    },
     "description": "",
     "githubUrl": "https://github.com/GuilhermeSilvaCosta/feel-the-beat-inside"
   }

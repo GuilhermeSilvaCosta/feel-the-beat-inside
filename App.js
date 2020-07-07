@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import Player from './src/components/Player';
+import getEnvVars from './environment';
 
 import api from '~/services/api';
 import Routes from '~/routes';
@@ -13,6 +14,8 @@ import { store, persistor } from '~/store';
 
 export default function App() {
     const [hasToken, setHasToken] = useState(false);
+
+    const { spotifyKey } = getEnvVars();
 
     useEffect(() => {
         async function getToken() {
@@ -23,7 +26,7 @@ export default function App() {
                     grant_type: 'client_credentials',
                 }),
                 headers: {
-                    Authorization: 'Basic NTQwZWU4NDI2YmZkNDk5N2E2ZWJmMmIxZjVlYmY5NmQ6ZjhkN2VhMTU3MjYxNDE1NGE0YmNkZmUyYTJlOWYzYmY=',
+                    Authorization: `Basic ${spotifyKey}`,
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             });
@@ -32,7 +35,7 @@ export default function App() {
             setHasToken(true);
         }
         getToken();
-    }, []);
+    }, [spotifyKey]);
 
     return (
         <Provider store={store}>
